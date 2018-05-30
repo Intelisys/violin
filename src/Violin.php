@@ -290,16 +290,16 @@ class Violin implements ValidatorContract
             $args = $item['args'];
 
             $argReplace = array_map(function($i) {
-                return "{\${$i}}";
+                return "{arg{$i}}";
             }, array_keys($args));
 
             // Number of arguments
             $args[] = count($item['args']);
-            $argReplace[] = '{$#}';
+            $argReplace[] = '{arg#}';
 
             // All arguments
             $args[] = implode(', ', $item['args']);
-            $argReplace[] = '{$*}';
+            $argReplace[] = '{args}';            
 
             // Replace arguments
             $message = str_replace($argReplace, $args, $message);
